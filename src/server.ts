@@ -15,7 +15,7 @@ const server = Fastify({
   // }
 })
 server.register(cors, {
-  origin: ["http://localhost:5173"],
+  origin: ["pwa-orpin-two.vercel.app"],
   credentials: true
 })
 server.register(notificationRoutes)
