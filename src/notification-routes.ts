@@ -28,12 +28,15 @@ export async function notificationRoutes(server: FastifyInstance) {
           p256dh: z.string(),
           auth: z.string()
         })
-      })
+      }),
+      title: z.string(),
+      body: z.string()
     })
 
-    const { subscription } = sendBushBody.parse(request.body)
+    const { subscription, title, body } = sendBushBody.parse(request.body)
+    const notification = { title, body }
 
-    webPush.sendNotification(subscription, 'Backend')
+    webPush.sendNotification(subscription, Buffer.from(JSON.stringify(notification)))
 
     reply.send(201)
   })
