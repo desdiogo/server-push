@@ -20,13 +20,16 @@ server.register(cors, {
 })
 server.register(notificationRoutes)
 
+const port = Number(process.env.PORT) || 3000;
+const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
+
 /**
  * Run the server!
  */
 const start = async () => {
   try {
 
-    await server.listen({ port: 3000 })
+    await server.listen({ port, host })
   } catch (err) {
     server.log.error(err)
     process.exit(1)
